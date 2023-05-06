@@ -10,7 +10,7 @@ function TaskCard({ task }) {
 
   return (
     <div style={styleObj} onClick={() => router.push(`/edit/${task.id}`)}>
-      <h1>{task.title}</h1>
+      <h1>{`${task.title} ID: ${task.id}`}</h1>
       <button type="button">Delete</button>
       <p>{task.description}</p>
     </div>

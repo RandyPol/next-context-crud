@@ -1,5 +1,6 @@
 'use client'
 import { createContext, useContext, useState } from 'react'
+import { v4 as uuid } from 'uuid'
 
 const TasksContext = createContext()
 
@@ -35,7 +36,7 @@ const TasksProvider = ({ children }) => {
     setTask((prev) => [
       ...prev,
       {
-        id: tasks.length + 1,
+        id: uuid(),
         title,
         description,
       },
