@@ -1,36 +1,35 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useTasks } from '@/context/TasksContext'
 import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
 
 function Page({ params }) {
-  const [task, setTask] = useState({
-    title: '',
-    description: '',
-  })
   const { tasks, createTask, updateTask } = useTasks()
   const router = useRouter()
 
-  console.log(task)
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm()
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setTask((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
+  const onSubmit = handleSubmit((data) => {
+    const { title, description } = data
     if (params.id) {
-      updateTask(params.id, task)
+      updateTask(params.id, {
+        title,
+        description,
+      })
     } else {
-      createTask(task)
+      createTask({
+        title,
+        description,
+      })
     }
     router.push('/')
-  }
+  })
 
   useEffect(() => {
     if (params.id) {
@@ -38,26 +37,24 @@ function Page({ params }) {
         return task.id === params.id
       })
       if (taskFound) {
-        setTask(taskFound)
+        setValue('title', taskFound.title)
+        setValue('description', taskFound.description)
       }
     }
-  }, [params.id, tasks])
+  }, [params.id, tasks, setValue])
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={onSubmit}>
       <input
-        name="title"
-        type="text"
         placeholder="Write a title"
-        onChange={handleChange}
-        value={task?.title}
+        {...register('title', { required: true })}
       />
+      {errors.title && <span>This field is required</span>}
       <textarea
-        name="description"
         placeholder="Write a description"
-        onChange={handleChange}
-        value={task?.description}
+        {...register('description', { required: true })}
       />
+      {errors.description && <span>This field is required</span>}
       <button type="submit">Create</button>
     </form>
   )
