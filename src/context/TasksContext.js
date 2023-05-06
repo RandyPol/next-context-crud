@@ -42,11 +42,16 @@ const TasksProvider = ({ children }) => {
       },
     ])
 
+  const deleteTask = (id) => {
+    setTask((prev) => prev.filter((task) => task.id !== id))
+  }
+
   return (
     <TasksContext.Provider
       value={{
         tasks,
         createTask,
+        deleteTask,
       }}
     >
       {children}
