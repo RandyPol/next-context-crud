@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar'
 import { TasksProvider } from '@/context/TasksContext'
+import { Toaster } from 'react-hot-toast'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
         <TasksProvider>
           <Navbar />
           {children}
+          <Toaster />
         </TasksProvider>
       </body>
     </html>
