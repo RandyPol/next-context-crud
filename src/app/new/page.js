@@ -12,9 +12,14 @@ function Page() {
       [name]: value,
     }))
   }
-  console.log(JSON.stringify(task))
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    console.log(task)
+  }
+
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <input
         name="title"
         type="text"
