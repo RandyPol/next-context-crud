@@ -14,7 +14,7 @@ const useTasks = () => {
 }
 
 const TasksProvider = ({ children }) => {
-  const [tasks, setTask] = useState([
+  const [tasks, setTasks] = useState([
     {
       id: '1',
       title: 'Task 1',
@@ -33,7 +33,7 @@ const TasksProvider = ({ children }) => {
   ])
 
   const createTask = ({ title, description }) =>
-    setTask((prev) => [
+    setTasks((prev) => [
       ...prev,
       {
         id: uuid(),
@@ -43,11 +43,11 @@ const TasksProvider = ({ children }) => {
     ])
 
   const deleteTask = (id) => {
-    setTask((prev) => prev.filter((task) => task.id !== id))
+    setTasks((prev) => prev.filter((task) => task.id !== id))
   }
 
   const updateTask = (id, { title, description }) => {
-    setTask((prev) =>
+    setTasks((prev) =>
       prev.map((task) => {
         if (task.id === id) {
           return {
