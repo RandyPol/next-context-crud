@@ -12,7 +12,10 @@ function TaskCard({ task }) {
 
   const handleDelete = (event) => {
     event.stopPropagation()
-    deleteTask(task.id)
+    const confirm = window.confirm(
+      `Are you sure you want to delete ${task.title}?`
+    )
+    if (confirm) deleteTask(task.id)
   }
 
   return (
