@@ -4,8 +4,12 @@ import { createContext, useContext } from 'react'
 const TasksContext = createContext()
 
 const useTasks = () => {
-  const tasks = useContext(TasksContext)
-  return tasks
+  const context = useContext(TasksContext)
+  if (!context) {
+    throw new Error(`useTasks must be used within a TasksProvider`)
+  }
+
+  return context
 }
 
 const TasksProvider = ({ children }) => {

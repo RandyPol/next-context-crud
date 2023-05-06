@@ -1,5 +1,5 @@
 'use client'
-import { TasksContext, useTasks } from '../../context/TasksContext'
+import { useTasks } from '../../context/TasksContext'
 
 function Page() {
   const tasks = useTasks()
