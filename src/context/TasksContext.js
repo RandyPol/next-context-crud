@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
 import { v4 as uuid } from 'uuid'
 
 const TasksContext = createContext()
@@ -14,23 +14,14 @@ const useTasks = () => {
 }
 
 const TasksProvider = ({ children }) => {
-  const [tasks, setTasks] = useState([
-    {
-      id: '1',
-      title: 'Task 1',
-      description: 'Description 1',
-    },
-    {
-      id: '2',
-      title: 'Task 2',
-      description: 'Description 2',
-    },
-    {
-      id: '3',
-      title: 'Task 3',
-      description: 'Description 3',
-    },
-  ])
+  const [tasks, setTasks] = useState(() => {
+    const tasks = localStorage.getItem('tasks')
+    return tasks.length > 0 ? JSON.parse(tasks) : []
+  })
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
 
   const createTask = ({ title, description }) =>
     setTasks((prev) => [
