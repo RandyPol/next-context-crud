@@ -1,5 +1,7 @@
+import { useRouter } from 'next/navigation'
 
 function TaskCard({ task }) {
+  const router = useRouter()
 
   const styleObj = {
     backgroundColor: '#202020',
@@ -7,7 +9,7 @@ function TaskCard({ task }) {
   }
 
   return (
-    <div style={styleObj}>
+    <div style={styleObj} onClick={() => router.push(`/edit/${task.id}`)}>
       <h1>{task.title}</h1>
       <button type="button">Delete</button>
       <p>{task.description}</p>
