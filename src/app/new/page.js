@@ -1,9 +1,12 @@
 'use client'
-
 import { useState } from 'react'
+import { useTasks } from '@/context/TasksContext'
+import { useRouter } from 'next/navigation'
 
 function Page() {
   const [task, setTask] = useState()
+  const { createTask } = useTasks()
+  const router = useRouter()
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -13,13 +16,14 @@ function Page() {
     }))
   }
 
-  const onSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(task)
+    createTask(task)
+    router.push('/')
   }
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit}>
       <input
         name="title"
         type="text"
