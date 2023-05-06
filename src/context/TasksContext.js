@@ -16,17 +16,17 @@ const useTasks = () => {
 const TasksProvider = ({ children }) => {
   const [tasks, setTask] = useState([
     {
-      id: 1,
+      id: '1',
       title: 'Task 1',
       description: 'Description 1',
     },
     {
-      id: 2,
+      id: '2',
       title: 'Task 2',
       description: 'Description 2',
     },
     {
-      id: 3,
+      id: '3',
       title: 'Task 3',
       description: 'Description 3',
     },
@@ -46,12 +46,28 @@ const TasksProvider = ({ children }) => {
     setTask((prev) => prev.filter((task) => task.id !== id))
   }
 
+  const updateTask = (id, { title, description }) => {
+    setTask((prev) =>
+      prev.map((task) => {
+        if (task.id === id) {
+          return {
+            ...task,
+            title,
+            description,
+          }
+        }
+        return task
+      })
+    )
+  }
+
   return (
     <TasksContext.Provider
       value={{
         tasks,
         createTask,
         deleteTask,
+        updateTask,
       }}
     >
       {children}
