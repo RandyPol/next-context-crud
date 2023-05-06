@@ -5,8 +5,9 @@ export const useLocalstorage = (key, initialValue) => {
 
   useEffect(() => {
     const item = localStorage.getItem(key)
-    if (item) {
-      setValue(JSON.parse(item))
+    const tasks = JSON.parse(item)
+    if (tasks) {
+      setValue(tasks)
     }
   }, [key])
 
