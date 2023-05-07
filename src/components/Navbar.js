@@ -16,7 +16,7 @@ function Navbar() {
           onClick={() => {
             router.push('/new')
           }}
-          className="bg-green-500 hover:bg-green-400 px-5 py-2 text-gray-50 font-bold rounded-sm inline-flex"
+          className="bg-green-500 hover:bg-green-400 px-5 py-2 text-gray-50 font-bold rounded-sm inline-flex items-center"
         >
           Add Task
         </button>
