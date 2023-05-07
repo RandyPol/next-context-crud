@@ -54,13 +54,21 @@ function Page({ params }) {
           placeholder="Write a title"
           {...register('title', { required: true })}
         />
-        {errors.title && <span>This field is required</span>}
+        {errors.title && (
+          <span className="block text-red-400 mb-2">
+            This field is required
+          </span>
+        )}
         <textarea
           className="bg-gray-800 py-3 px-4 mb-2 block focus:outline-none w-full  "
           placeholder="Write a description"
           {...register('description', { required: true })}
         />
-        {errors.description && <span>This field is required</span>}
+        {errors.description && (
+          <span className="block text-red-400 mb-2">
+            This field is required
+          </span>
+        )}
         <button
           className="bg-green-500 hover:bg-green-400 px-2 py-2 rounded-sm disabled:opacity-30"
           type="submit"
